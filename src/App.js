@@ -1,25 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import StudentsData from './components/studentsdata';
+import StudentsDeets from './components/createdeets';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
+import Navlinks from './components/navlinks';
+import Home from './components/home';
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <Navlinks />,
+      children: [
+        {
+          index:true,
+          element:<Home />
+        },
+        {
+          path: '/input',
+          element: <StudentsDeets />,
+          errorElement: <div> Page  not Found </div>
+        },
+        {
+          path: '/data',
+          element: <StudentsData />,
+          errorElement: <div> Page  not Found </div>
+        }
+
+      ]
+    }
+   
+  ])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+
+{/* <StudentsDeets /> */}
+
+      <RouterProvider router = {router} />
+
     </div>
   );
 }
 
 export default App;
+
